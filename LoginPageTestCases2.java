@@ -3,6 +3,14 @@ package TestCases;
 
 
 
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -13,7 +21,7 @@ import org.testng.annotations.Test;
 import HKPages.LandingPage;
 import HKPages.LoginPage;
 import utils.ExcelApiTest;
-import utils.openChromeBrowser;
+import utils.OpenChromeBrowser;
 
 public class LoginPageTestCases2 {
   
@@ -22,7 +30,7 @@ public class LoginPageTestCases2 {
 	static LandingPage landingpage;
 	boolean res;
 	
-	String xlFilePath = "d:\\Test.xlsx";
+	String xlFilePath = "C:\\Users\\Administrator.xlsx";
 	String sheetName = "Sheet1";
 	ExcelApiTest eat = null;
 	
@@ -42,7 +50,7 @@ public class LoginPageTestCases2 {
 	public void initDriver()
 	{
 		
-		openChromeBrowser ob = new openChromeBrowser();
+		OpenChromeBrowser ob = new OpenChromeBrowser();
 		driver = ob.openChrome();
 		driver.get("https://the-internet.herokuapp.com/login");
 		lp = new LoginPage(driver);
@@ -55,20 +63,20 @@ public class LoginPageTestCases2 {
 	  
 	 res= lp.chkTitle("The Internet");
 	  
-	Assert.assertEquals(true,res);  
+	AssertJUnit.assertEquals(true,res);  
   }
 	@Test
 	public void chkToSeeIfFooterIsThere ()
 	{
 		
-		Assert.assertEquals(true, lp.chkPageFooter());
+		AssertJUnit.assertEquals(true, lp.chkPageFooter());
 		
 	}
 	
 	@Test
 	public void chkToSeePasswordMasked()
 	{
-		Assert.assertEquals(true, lp.isPasswordMasked());
+		AssertJUnit.assertEquals(true, lp.isPasswordMasked());
 	}
 	
 	@Test (dataProvider="xldp")
@@ -82,7 +90,7 @@ public class LoginPageTestCases2 {
 		lp.fillPassword(p);
 		lp.clickLoginBtn();
 		
-		Assert.assertEquals(true,landingpage.isLoginSuccess());
+		AssertJUnit.assertEquals(true,landingpage.isLoginSuccess());
 		
 	}
 	
@@ -93,7 +101,7 @@ public class LoginPageTestCases2 {
 		lp.fillPassword("SuperSPassword!");
 		lp.clickLoginBtn();
 		
-		Assert.assertEquals(false,landingpage.isLoginSuccess());
+		AssertJUnit.assertEquals(false,landingpage.isLoginSuccess());
 		
 	}
 	
